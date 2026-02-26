@@ -26,7 +26,7 @@ jobs:
         env:
           N8N_WEBHOOK_URL: ${{ secrets.N8N_WEBHOOK_URL }}
         run: |
-          python scraper.py "https://www.falabella.com.pe/falabella-pe/category/cat40058"
+          python scraper.py "https://www.falabella.com.pe/falabella-pe/collection/ver-todo-zapatillas-y-zapatos-hombre?sortBy=derived.price.search%2Casc&latLong=%257B%2522latitude%2522%253A%2522-12.0510554271%2522%252C%2522longitude%2522%253A%2522-77.0490377322%2522%257D"
 
       - name: Save results
         uses: actions/upload-artifact@v4
