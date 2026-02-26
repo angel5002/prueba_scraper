@@ -1,0 +1,35 @@
+name: Falabella Scraper
+
+on:
+  schedule:
+    - cron: '0 */6 * * *'  # Cada 6 horas
+  workflow_dispatch:         # También manual
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          playwright install chromium
+          playwright install-deps
+
+      - name: Run scraper
+        env:
+          N8N_WEBHOOK_URL: ${{ secrets.N8N_WEBHOOK_URL }}
+        run: |
+          python scraper.py "https://www.falabella.com.pe/falabella-pe/category/cat40058"
+
+      - name: Save results
+        uses: actions/upload-artifact@v4
+        with:
+          name: productos-${{ github.run_id }}
+          path: productos.json
