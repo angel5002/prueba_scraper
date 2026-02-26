@@ -8,7 +8,7 @@ import requests
 from datetime import datetime
 
 URL = sys.argv[1] if len(sys.argv) > 1 else "https://www.falabella.com.pe/falabella-pe/category/cat40058"
-#N8N_WEBHOOK = os.environ.get("N8N_WEBHOOK_URL", "")
+N8N_WEBHOOK = os.environ.get("N8N_WEBHOOK_URL", "")
 
 with sync_playwright() as p:
     browser = p.chromium.launch(headless=True)
