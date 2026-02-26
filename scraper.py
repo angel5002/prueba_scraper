@@ -29,6 +29,12 @@ with sync_playwright() as p:
     page.wait_for_timeout(5000)
 
     html = page.content()
+
+    with open("debug.html", "w", encoding="utf-8") as f:
+        f.write(html)
+    print(f"Título de la página: {titulo}")
+    print(f"Tamaño HTML: {len(html)} caracteres")
+    
     titulo = page.title()
     browser.close()
 
